@@ -47,7 +47,14 @@ class Dosen extends BaseController
             'nama_dosen'=> $nama,
             'status_dosen'=> $status
         ]);
-
+        $token = getenv('TELEGRAM_BOT_TOKEN'); // token bot
+ 
+		$datas = [
+		'text' =>"WARNI:)",
+		'chat_id' => getenv('TELEGRAM_CHAT_ID')
+        ];
+       
+		file_get_contents("https://api.telegram.org/bot$token/sendMessage?" . http_build_query($datas) );
         return redirect()->to('dosen')->with('message','Data telah ditambahkan');
 
     }
